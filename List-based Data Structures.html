@@ -1,0 +1,250 @@
+Operations on Stack:
+
+push( x ) : insert element x at the top of stack.
+
+void push (int stack[ ] , int x , int n) {
+    if ( top == n-1 ) {         //if top position is the last of position of stack, means stack is full .
+        cout << “Stack is full.Overflow condition!” ;
+    }
+    else{
+        top = top +1 ;            //incrementing top position 
+        stack[ top ] = x ;       //inserting element on incremented position .  
+}
+}
+pop( ) : removes element from the top of stack.
+
+void pop (int stack[ ] ,int n ) 
+{
+
+    if( isEmpty ( ) )
+    {
+        cout << “Stack is empty . Underflow condition! ” << endl ;
+    }
+    else    
+    {
+         top = top - 1 ; //decrementing top’s position will detach last element from stack .            
+    }
+}
+topElement ( ) : access the top element of stack.
+
+int topElement ( )
+{
+    return stack[ top ];
+}
+isEmpty ( ) : check whether the stack is empty or not.
+
+bool isEmpty ( )
+{
+    if ( top == -1 )  //stack is empty .
+    return true ; 
+    else
+    return false;
+}
+size ( ) : tells the current size of stack .
+
+int size ( )
+{
+    return top + 1;
+}
+Implementation:
+
+#include <iostream>
+using namespace std;
+int top = -1; //globally defining the value of top ,as the stack is empty .
+
+void push (int stack[ ] , int x , int n)
+{
+    if ( top == n-1 )          //if top position is the last of position of stack, means stack is full .
+    {
+        cout << “Stack is full.Overflow condition!” ;
+    }
+    else
+    {
+        top = top +1 ;            //incrementing top position 
+        stack[ top ] = x ;       //inserting element on incremented position .  
+    }
+}
+bool isEmpty ( )
+{
+    if ( top == -1 )  //stack is empty .
+        return true ; 
+    else
+        return false;
+}
+void pop (int stack[ ] ,int n ) 
+{
+
+    if( isEmpty ( ) )
+    {
+        cout << “Stack is empty . Underflow condition! ” << endl ;
+    }
+    else    
+    {
+         top = top - 1 ; //decrementing top’s position will detach last element from stack .            
+    }
+}
+int size ( )
+{
+    return top + 1;
+}
+int topElement ( )
+{
+    return stack[ top ];
+}
+// Now lets implementing these functions on the above stack
+
+int main( )
+{
+    int stack[ 3 ];
+    // pushing element 5 in the stack .
+    push(stack , 5 , 3 ) ;
+
+    cout << “Current size of stack is ” << size ( ) << endl ;
+
+    push(stack , 10 , 3);
+    push (stack , 24 , 3) ;
+
+    cout << “Current size of stack is ” << size( ) << endl ;
+
+    //As now the stack is full ,further pushing  will show overflow condition .
+    push(stack , 12 , 3) ;
+
+    //Accessing the top element .
+    cout << ”The current top element in stack is “ << topElement( ) << endl;
+
+    //now removing all the elements from stack .
+    for(int i = 0 ; i < 3;i++ )
+        pop( );
+    cout << “Current size of stack is ” << size( ) << endl ;
+
+    //as stack is empty , now further popping will show underflow condition .
+    pop ( );
+
+}
+Output :
+Current size of stack is 1
+Current size of stack is 3
+The current top element in stack is 24
+Stack is full.Overflow condition!
+Current size of stack is 0
+Stack is empty . Underflow condition!
+
+Balanced parenthesis problem :
+#include <iostream>
+using namespace std;
+int top;
+void  check (char str[ ], int n, char stack [ ])
+{
+    for(int i = 0 ; i < n ; i++ )
+    {
+        if (str [ i ] == ‘(’)
+        {
+            top = top + 1;
+            stack[ top ] = ‘ ( ’;
+        }
+        if(str[ i ] == ‘)’ )
+        {
+            if(top == -1 )
+            {
+                top = top -1 ;
+                break ;
+             }
+            else
+            {
+                 top = top -1 ;
+            }
+        }
+    }
+    if(top == -1)
+        cout << “String is balanced!” << endl;
+    else
+        cout << “String is unbalanced!” << endl ;
+}
+
+int main ( ) 
+{
+    //balanced parenthesis string.
+    char str[  ] = { ‘(‘ , ‘a’ , ‘+’, ‘ ( ’, ‘b ’ , ‘-’ , ‘ c’ ,‘)’ , ‘ ) ’} ;
+
+    // unbalanced string . 
+    char str1 [ ] = { ‘(’ , ‘(’ , ‘a’ , ‘ + ’ , ‘ b’ , ‘)’ } ;
+    char stack [ 15 ] ;
+    top = -1;   
+    check (str , 9 , stack );      //passing balanced string   
+    top = -1 ;
+    check(str1 , 5 , stack) ;    //passing unbalanced string
+    return 0;
+
+}
+Output :
+String is balanced!
+String is unbalanced!
+
+Here are the C++ STL tools for Stacks which are in "stack" header file.
+
+Declaration:
+
+stack <int> s;
+Push:
+
+s.push(element);
+Pop:
+
+s.pop();
+Top Element:
+
+s.top()
+IsEmpty:
+
+s.empty()
+Size:
+
+s.size()
+Implementation of STL Functions:
+
+#include <iostream>
+#include <stack>
+using namespace std;
+int main( )
+{
+    stack <int> s;  // declaration of stack
+
+    //inserting 5 elements in stack from 0 to 4.
+    for(int i = 0;i < 5; i++)
+    {
+        s.push( i ) ;
+    }
+
+    //Now the stack is {0, 1, 2, 3, 4}
+
+    //size of stack s
+    cout<<”Size of stack is: ” <<s.size( )<<endl;
+
+    //accessing top element from stack, it will be the last inserted element.
+    cout<<”Top element of stack is: ” <<s.top( ) <<endl ;
+
+    //Now deleting all elements from stack 
+    for(int i = 0;i < 5;i++)
+    {
+        s.pop( );
+    }
+
+    //Now stack is empty,so empty( ) function will return true.
+
+    if(s.empty())
+    {
+        cout <<”Stack is empty.”<<endl;
+    }
+    else
+    {
+        cout <<”Stack is Not empty.”<<endl;
+    }
+
+
+    return 0;
+
+}
+Output:
+Size of stack is: 5
+Top element of stack is: 4
+Stack is empty.
